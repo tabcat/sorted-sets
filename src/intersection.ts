@@ -3,8 +3,8 @@ import { pairwiseTraversal } from "./util.js";
 /**
  * Yields the intersection of two ordered sets.
  *
- * @param source - Set from which to remove elements
- * @param target - Set of elements to be removed
+ * @param source - Set from which matched element will be yielded
+ * @param target - Set of elements to check for matches
  * @param comparator - Used to compare two set elements, same as Array.sort parameter
  */
 export function* intersection<T, A extends T>(
