@@ -30,7 +30,7 @@ describe("difference", () => {
         ...difference(
           slice(0, 1, numbers()),
           slice(0, 1, numbers()),
-          comparator
+          comparator,
         ),
       ]).toEqual([]);
     });
@@ -82,7 +82,7 @@ describe("symmetric", () => {
         ...symmetric(
           slice(0, 1, numbers()),
           slice(0, 1, numbers()),
-          comparator
+          comparator,
         ),
       ]).toEqual([]);
     });
@@ -148,13 +148,13 @@ describe("diff", () => {
       expect([...diff(even(), odd(), comparator)]).toEqual([
         ...map(
           (n) => [n % 2 === 0 ? n : null, n % 2 === 1 ? n : null],
-          numbers()
+          numbers(),
         ),
       ]);
       expect([...diff(odd(), even(), comparator)]).toEqual([
         ...map(
           (n) => [n % 2 === 1 ? n : null, n % 2 === 0 ? n : null],
-          numbers()
+          numbers(),
         ),
       ]);
     });
@@ -185,7 +185,7 @@ describe("diff", () => {
           slice(0, 1, numbers()),
           slice(0, 1, numbers()),
           comparator,
-          differ
+          differ,
         ),
       ]).toEqual([...map((n) => [n, n], slice(0, 1, numbers()))]);
     });
@@ -209,13 +209,13 @@ describe("diff", () => {
       expect([...diff(even(), odd(), comparator, differ)]).toEqual([
         ...map(
           (n) => [n % 2 === 0 ? n : null, n % 2 === 1 ? n : null],
-          numbers()
+          numbers(),
         ),
       ]);
       expect([...diff(odd(), even(), comparator, differ)]).toEqual([
         ...map(
           (n) => [n % 2 === 1 ? n : null, n % 2 === 0 ? n : null],
-          numbers()
+          numbers(),
         ),
       ]);
     });
