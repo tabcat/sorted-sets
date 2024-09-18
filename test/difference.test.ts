@@ -30,7 +30,7 @@ describe("difference", () => {
         ...difference(
           slice(0, 1, numbers()),
           slice(0, 1, numbers()),
-          comparator,
+          comparator
         ),
       ]).toEqual([]);
     });
@@ -82,7 +82,7 @@ describe("symmetric", () => {
         ...symmetric(
           slice(0, 1, numbers()),
           slice(0, 1, numbers()),
-          comparator,
+          comparator
         ),
       ]).toEqual([]);
     });
@@ -148,13 +148,74 @@ describe("diff", () => {
       expect([...diff(even(), odd(), comparator)]).toEqual([
         ...map(
           (n) => [n % 2 === 0 ? n : null, n % 2 === 1 ? n : null],
-          numbers(),
+          numbers()
         ),
       ]);
       expect([...diff(odd(), even(), comparator)]).toEqual([
         ...map(
           (n) => [n % 2 === 1 ? n : null, n % 2 === 0 ? n : null],
-          numbers(),
+          numbers()
+        ),
+      ]);
+    });
+  });
+
+  describe("finds pairwise set union when using differ", () => {
+    const differ = () => true;
+
+    test(testNames.firstAndSecondEmpty, () => {
+      expect([...diff(empty(), empty(), comparator)]).toEqual([]);
+    });
+
+    test(testNames.firstEmpty, () => {
+      expect([...diff(empty(), numbers(), comparator)]).toEqual([
+        ...map((n) => [null, n], numbers()),
+      ]);
+    });
+
+    test(testNames.secondEmpty, () => {
+      expect([...diff(numbers(), empty(), comparator)]).toEqual([
+        ...map((n) => [n, null], numbers()),
+      ]);
+    });
+
+    test(testNames.identicalSingle, () => {
+      expect([
+        ...diff(
+          slice(0, 1, numbers()),
+          slice(0, 1, numbers()),
+          comparator,
+          differ
+        ),
+      ]).toEqual([...map((n) => [n, n], slice(0, 1, numbers()))]);
+    });
+
+    test(testNames.identical, () => {
+      expect([...diff(numbers(), numbers(), comparator, differ)]).toEqual([
+        ...map((n) => [n, n], numbers()),
+      ]);
+    });
+
+    test(testNames.partialOverlap, () => {
+      expect([...diff(numbers(), even(), comparator, differ)]).toEqual([
+        ...map((n) => [n, n % 2 === 0 ? n : null], numbers()),
+      ]);
+      expect([...diff(numbers(), odd(), comparator, differ)]).toEqual([
+        ...map((n) => [n, n % 2 !== 0 ? n : null], numbers()),
+      ]);
+    });
+
+    test(testNames.noOverlap, () => {
+      expect([...diff(even(), odd(), comparator, differ)]).toEqual([
+        ...map(
+          (n) => [n % 2 === 0 ? n : null, n % 2 === 1 ? n : null],
+          numbers()
+        ),
+      ]);
+      expect([...diff(odd(), even(), comparator, differ)]).toEqual([
+        ...map(
+          (n) => [n % 2 === 1 ? n : null, n % 2 === 0 ? n : null],
+          numbers()
         ),
       ]);
     });

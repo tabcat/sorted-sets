@@ -42,7 +42,8 @@ export function* symmetric<T, B extends T>(
   }
 }
 
-export type Diff<T> = [T, null] | [null, T];
+export type ExclusiveDiff<T> = [T, null] | [null, T];
+export type Diff<T> = ExclusiveDiff<T> | [T, T];
 
 /**
  * Yields the pairwise symmetric difference of two ordered sets.
@@ -50,15 +51,32 @@ export type Diff<T> = [T, null] | [null, T];
  * @param source - Source ordered set
  * @param target - Target ordered set
  * @param comparator - Used to compare two set elements, same as Array.sort parameter
+ * @param differ - Used to compare two set elements of the same comparator value
  */
+export function diff<T, B extends T>(
+  source: Iterable<B>,
+  target: Iterable<B>,
+  comparator: (a: T, b: T) => number
+): Generator<ExclusiveDiff<B>>;
+export function diff<T, B extends T>(
+  source: Iterable<B>,
+  target: Iterable<B>,
+  comparator: (a: T, b: T) => number,
+  differ: (a: T, b: T) => boolean
+): Generator<ExclusiveDiff<B>>;
 export function* diff<T, B extends T>(
   source: Iterable<B>,
   target: Iterable<B>,
   comparator: (a: T, b: T) => number,
+  differ?: (a: T, b: T) => boolean
 ): Generator<Diff<B>> {
   for (const [s, t] of pairwiseTraversal(source, target, comparator)) {
-    if (s === null || t === null) {
-      yield [s, t] as Diff<B>;
+    if (s != null && t != null) {
+      if (differ != null && differ(s, t)) {
+        yield [s, t] as Diff<B>;
+      }
+    } else {
+      yield [s, t] as ExclusiveDiff<B>;
     }
   }
 }
