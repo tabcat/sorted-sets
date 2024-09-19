@@ -1,6 +1,6 @@
 {
   "name": "@tabcat/ordered-sets",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Utilities for working with ordered sets",
   "type": "module",
   "main": "dist/src/index.js",
