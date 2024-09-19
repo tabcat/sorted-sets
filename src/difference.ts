@@ -58,17 +58,17 @@ export function diff<T, B extends T>(
   target: Iterable<B>,
   comparator: (a: T, b: T) => number,
 ): Generator<ExclusiveDiff<B>>;
-export function diff<T, U, B extends T & U>(
+export function diff<T, B extends T>(
   source: Iterable<B>,
   target: Iterable<B>,
   comparator: (a: T, b: T) => number,
-  differ: (a: U, b: U) => boolean,
+  differ: (a: B, b: B) => boolean,
 ): Generator<ExclusiveDiff<B>>;
-export function* diff<T, U, B extends T & U>(
+export function* diff<T, B extends T>(
   source: Iterable<B>,
   target: Iterable<B>,
   comparator: (a: T, b: T) => number,
-  differ?: (a: U, b: U) => boolean,
+  differ?: (a: B, b: B) => boolean,
 ): Generator<Diff<B>> {
   for (const [s, t] of pairwiseTraversal(source, target, comparator)) {
     if (s != null && t != null) {
