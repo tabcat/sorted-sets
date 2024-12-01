@@ -10,7 +10,7 @@ describe("union", () => {
     expect(isGenerator(union([], [], comparator))).toBe(true);
   });
 
-  describe("finds union of two ordered sets", () => {
+  describe("finds union of two sorted sets", () => {
     test(testNames.firstAndSecondEmpty, () => {
       expect([...union(empty(), empty(), comparator)]).toEqual([]);
     });

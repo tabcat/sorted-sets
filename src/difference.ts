@@ -1,7 +1,7 @@
 import { pairwiseTraversal } from "./util.js";
 
 /**
- * Yields the difference of two ordered sets.
+ * Yields the difference of two sorted sets.
  *
  * @param minuend - Set from which to remove elements
  * @param subtrahend - Set of elements to be removed
@@ -20,10 +20,10 @@ export function* difference<T, B extends T>(
 }
 
 /**
- * Yields the symmetric difference of two ordered sets.
+ * Yields the symmetric difference of two sorted sets.
  *
- * @param minuend - Source ordered set
- * @param subtrahend - Target ordered set
+ * @param minuend - Source sorted set
+ * @param subtrahend - Target sorted set
  * @param comparator - Used to compare two set elements, same as Array.sort parameter
  */
 export function* symmetric<T, B extends T>(
@@ -46,10 +46,10 @@ export type ExclusiveDiff<T> = [T, null] | [null, T];
 export type Diff<T> = ExclusiveDiff<T> | [T, T];
 
 /**
- * Yields the pairwise symmetric difference of two ordered sets.
+ * Yields the pairwise symmetric difference of two sorted sets.
  *
- * @param source - Source ordered set
- * @param target - Target ordered set
+ * @param source - Source sorted set
+ * @param target - Target sorted set
  * @param comparator - Used to compare two set elements, same as Array.sort parameter
  * @param differ - Used to compare two set elements of the same comparator value
  */

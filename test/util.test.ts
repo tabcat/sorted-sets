@@ -133,7 +133,7 @@ describe("pairwiseTraversal", () => {
     );
   });
 
-  describe("finds ordered traversal of two sets", () => {
+  describe("finds sorted traversal of two sets", () => {
     let g: Generator<[...PairwiseElement<number, number>, ...PairwiseDone]>;
     let u: [...PairwiseElement<number, number>, ...PairwiseDone][];
 

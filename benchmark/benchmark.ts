@@ -15,12 +15,12 @@ interface SetImpl {
   (s: Set<number>, t: Set<number>): Set<number>
 }
 
-// ordered-set implementation of a set operation
-interface OrderedImpl {
+// sorted-set implementation of a set operation
+interface SortedImpl {
   (s: Iterable<number>, t: Iterable<number>, comparator: (a: number, b: number) => number): Generator<number>
 }
 
-const versusSet = (setImpl: SetImpl, orderedImpl: OrderedImpl, name: string, index: number): void => {
+const versusSet = (setImpl: SetImpl, sortedImpl: SortedImpl, name: string, index: number): void => {
   const sample = filter(() => Math.random() > 0.5, safeArrayAccess(lotsOfIterables, index)())
   const sampleSet = new Set(sample)
 
@@ -28,8 +28,8 @@ const versusSet = (setImpl: SetImpl, orderedImpl: OrderedImpl, name: string, ind
   .add(`${name}\timpl: Set\t\tsize: ${safeArrayAccess(setSizes, index)}`, (): void => {
     setImpl(safeArrayAccess(lotsOfSets, index), sampleSet)
   })
-  .add(`${name}\timpl: ordered-sets\tsize: ${safeArrayAccess(setSizes, index)}`, (): void => {
-    for (const _ of orderedImpl(safeArrayAccess(lotsOfIterables, index)(), sample, comparator)) {}
+  .add(`${name}\timpl: sorted-sets\tsize: ${safeArrayAccess(setSizes, index)}`, (): void => {
+    for (const _ of sortedImpl(safeArrayAccess(lotsOfIterables, index)(), sample, comparator)) {}
   })
   .on('cycle', (event: any) => {
     console.log(String(event.target))
@@ -37,8 +37,8 @@ const versusSet = (setImpl: SetImpl, orderedImpl: OrderedImpl, name: string, ind
   .run()
 }
 
-export const versusSets = (setImpl: SetImpl, orderedImpl: OrderedImpl, name: string): void => {
-  setSizes.map((_, index) => versusSet(setImpl, orderedImpl, name, index))
+export const versusSets = (setImpl: SetImpl, sortedImpl: SortedImpl, name: string): void => {
+  setSizes.map((_, index) => versusSet(setImpl, sortedImpl, name, index))
 }
 
 /**

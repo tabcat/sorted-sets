@@ -11,7 +11,7 @@ describe("split", () => {
     expect(isGenerator(split(empty(), empty(), comparator))).toBe(true);
   });
 
-  describe("finds split of two ordered sets", () => {
+  describe("finds split of two sorted sets", () => {
     test(testNames.firstAndSecondEmpty, () => {
       expect([...split(empty(), empty(), comparator)]).toEqual([[]]);
     });
@@ -73,7 +73,7 @@ describe("ranges", () => {
     expect(isGenerator(ranges(empty(), empty(), comparator))).toBe(true);
   });
 
-  describe("finds ranges of two ordered sets", () => {
+  describe("finds ranges of two sorted sets", () => {
     test(testNames.firstAndSecondEmpty, () => {
       expect([...ranges(empty(), empty(), comparator)]).toEqual([[0, 0]]);
     });

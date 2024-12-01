@@ -1,7 +1,7 @@
 {
-  "name": "@tabcat/ordered-sets",
+  "name": "@tabcat/sorted-sets",
   "version": "4.2.0",
-  "description": "Utilities for working with ordered sets",
+  "description": "Utilities for working with sorted sets",
   "type": "module",
   "main": "dist/src/index.js",
   "files": [
@@ -47,7 +47,7 @@
   },
   "keywords": [
     "set",
-    "ordered",
+    "sorted",
     "predicate"
   ],
   "author": "tabcat",

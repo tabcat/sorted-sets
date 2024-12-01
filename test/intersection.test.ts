@@ -10,7 +10,7 @@ describe("intersection", () => {
     expect(isGenerator(intersection(empty(), empty(), comparator))).toBe(true);
   });
 
-  describe("finds intersection of two ordered sets", () => {
+  describe("finds intersection of two sorted sets", () => {
     test(testNames.firstAndSecondEmpty, () => {
       expect([...intersection(empty(), empty(), comparator)]).toEqual([]);
     });

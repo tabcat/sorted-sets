@@ -1,7 +1,7 @@
 import { pairwiseTraversal } from "./util.js";
 
 /**
- * Yields the union of two ordered sets.
+ * Yields the union of two sorted sets.
  *
  * @param source - Set of elements to add to union
  * @param target - Set of elements to also add to union

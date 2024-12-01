@@ -1,7 +1,7 @@
 import { pairwiseTraversal } from "./util.js";
 
 /**
- * Yields the intersection of two ordered sets.
+ * Yields the intersection of two sorted sets.
  *
  * @param source - Set from which matched element will be yielded
  * @param target - Set of elements to check for matches

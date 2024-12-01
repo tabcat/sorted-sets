@@ -105,10 +105,10 @@ export const iteratorIsDone = (result: IteratorResult<unknown>): boolean =>
   result.value === undefined && result.done === true;
 
 /**
- * Yields pairwise traversal of two ordered arrays.
+ * Yields pairwise traversal of two sorted arrays.
  *
- * @param iterableA - First ordered array
- * @param iterableB - Second ordered array
+ * @param iterableA - First sorted array
+ * @param iterableB - Second sorted array
  * @param comparator - Used to compare two set elements, same as Array.sort parameter
  */
 export function* pairwiseTraversal<A, B>(
