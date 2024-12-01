@@ -1,4 +1,4 @@
-import { pairwiseTraversal, type Range } from "./util";
+import { pairwiseTraversal, type Range } from "./util.js";
 
 /**
  * Splits a set into multiple sets at sector points.
