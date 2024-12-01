@@ -1,7 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { map, slice } from "iter-tools-es";
 import { numbers, even, odd, comparator, empty } from "./helpers/sets.js";
-import { isGenerator } from "./helpers/isGenerator.js";
+import { isAsyncGenerator, isGenerator } from "./helpers/isGenerator.js";
 import { testNames } from "./helpers/test-names.js";
 import {
   safeArrayAccess,
@@ -9,7 +9,10 @@ import {
   type PairwiseElement,
   readArray,
   PairwiseDone,
+  ensureSortedSet,
+  ensureSortedSetAsync,
 } from "../src/util.js";
+import { drain } from "./helpers/drain.js";
 
 describe("safeArrayAccess", () => {
   test("returns array[index]", () => {
@@ -84,6 +87,42 @@ describe("yieldArray", () => {
         expect(() => [...readArray([], 1)]).toThrow();
       });
     });
+  });
+});
+
+describe("ensureSortedSet", () => {
+  test(testNames.returnsGenerator, () => {
+    expect(isGenerator(ensureSortedSet(empty(), comparator)));
+  });
+
+  test("throws if iterable is not sorted", () => {
+    expect(() => [...ensureSortedSet([1, 0], comparator)]).toThrow();
+  }); 
+
+  test("throws if iterable contains duplicates", () => {
+    expect(() => [...ensureSortedSet([0, 0], comparator)]).toThrow();
+  }); 
+
+  test("yields sorted set", () => {
+    expect([...ensureSortedSet([0, 1, 2], comparator)]).toEqual([0, 1, 2]);
+  });
+});
+
+describe("ensureSortedSetAsync", () => {
+  test(testNames.returnsGenerator, () => {
+    expect(isAsyncGenerator(ensureSortedSetAsync(empty(), comparator)));
+  });
+
+  test("throws if iterable is not sorted", async () => {
+    await expect(drain(ensureSortedSetAsync([1, 0], comparator))).rejects.toThrow();
+  }); 
+
+  test("throws if iterable contains duplicates", async () => {
+    await expect(drain(ensureSortedSetAsync([0, 0], comparator))).rejects.toThrow();
+  }); 
+
+  test("yields sorted set", async () => {
+    expect(await drain(ensureSortedSetAsync([0, 1, 2], comparator))).toEqual([0, 1, 2]);
   });
 });
 

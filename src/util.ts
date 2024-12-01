@@ -59,6 +59,38 @@ export function* readArray<T>(
   }
 }
 
+export function* ensureSortedSet<T>(
+  iterable: Iterable<T>,
+  comparator: (a: T, b: T) => number,
+): Generator<T> {
+  let previous: T | null = null;
+
+  for (const element of iterable) {
+    if (previous != null && comparator(element, previous) <= 0) {
+      throw new Error("iterable is not a sorted set.");
+    }
+
+    yield element;
+    previous = element;
+  }
+}
+
+export async function* ensureSortedSetAsync<T>(
+  iterable: AsyncIterable<T> | Iterable<T>,
+  comparator: (a: T, b: T) => number,
+): AsyncGenerator<T> {
+  let previous: T | null = null;
+
+  for await (const element of iterable) {
+    if (previous != null && comparator(element, previous) <= 0) {
+      throw new Error("async-iterable is not a sorted set.");
+    }
+
+    yield element;
+    previous = element;
+  }
+}
+
 export type PairwiseElement<A, B> = [A, null] | [null, B] | [A, B];
 
 export type PairwiseDone = [source: boolean, target: boolean];
