@@ -1,8 +1,8 @@
-import { describe, test, expect } from "vitest";
 import { map, slice } from "iter-tools-es";
-import { difference, symmetric, diff } from "../src/difference.js";
-import { comparator, empty, even, numbers, odd } from "./helpers/sets.js";
+import { describe, expect, test } from "vitest";
+import { diff, difference, symmetric } from "../src/difference.js";
 import { isGenerator } from "./helpers/isGenerator.js";
+import { comparator, empty, even, numbers, odd } from "./helpers/sets.js";
 import { testNames } from "./helpers/test-names.js";
 
 describe("difference", () => {
