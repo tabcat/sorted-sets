@@ -1,6 +1,6 @@
 {
   "name": "@tabcat/sorted-sets",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Utilities for working with sorted sets",
   "type": "module",
   "main": "dist/src/index.js",
