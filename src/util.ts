@@ -59,14 +59,16 @@ export function* readArray<T>(
   }
 }
 
+const sentinel = Symbol();
+
 export function* ensureSortedSet<T>(
   iterable: Iterable<T>,
   comparator: (a: T, b: T) => number,
 ): Generator<T> {
-  let previous: T | null = null;
+  let previous: T | typeof sentinel = sentinel;
 
   for (const element of iterable) {
-    if (previous != null && comparator(element, previous) <= 0) {
+    if (previous !== sentinel && comparator(previous, element) >= 0) {
       throw new Error("iterable is not a sorted set.");
     }
 
@@ -79,10 +81,10 @@ export async function* ensureSortedSetAsync<T>(
   iterable: AsyncIterable<T> | Iterable<T>,
   comparator: (a: T, b: T) => number,
 ): AsyncGenerator<T> {
-  let previous: T | null = null;
+  let previous: T | typeof sentinel = sentinel;
 
   for await (const element of iterable) {
-    if (previous != null && comparator(element, previous) <= 0) {
+    if (previous !== sentinel && comparator(previous, element) >= 0) {
       throw new Error("async-iterable is not a sorted set.");
     }
 
