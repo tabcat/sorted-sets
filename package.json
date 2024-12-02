@@ -40,8 +40,8 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "vitest",
-    "lint": "prettier --check src test",
-    "format": "prettier --write src test",
+    "lint": "prettier src test --check",
+    "format": "prettier src test --write",
     "api-docs": "typedoc src",
     "benchmark": "pnpm build && node ./dist/benchmark/benchmark.js"
   },
