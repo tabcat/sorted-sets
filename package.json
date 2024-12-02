@@ -45,6 +45,11 @@
     "api-docs": "typedoc src",
     "benchmark": "pnpm build && node ./dist/benchmark/benchmark.js"
   },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
+  },
   "keywords": [
     "set",
     "sorted",
@@ -58,6 +63,7 @@
     "globals": "^15.0.0",
     "iter-tools-es": "^7.5.3",
     "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
     "vitest": "^1.5.0"
