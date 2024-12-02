@@ -50,6 +50,9 @@
       "prettier-plugin-organize-imports"
     ]
   },
+  "lint-staged": {
+    "*.ts": "prettier --ignore-unknown --write"
+  },
   "keywords": [
     "set",
     "sorted",
@@ -61,7 +64,9 @@
     "@types/benchmark": "^2.1.5",
     "benchmark": "^2.1.4",
     "globals": "^15.0.0",
+    "husky": "^9.1.7",
     "iter-tools-es": "^7.5.3",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typedoc": "^0.25.13",
