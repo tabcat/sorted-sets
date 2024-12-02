@@ -38,6 +38,7 @@
   },
   "types": "./dist/src/index.d.ts",
   "scripts": {
+    "prepublishOnly": "pnpm install && pnpm build",
     "ci": "pnpm build && pnpm lint && pnpm test",
     "build": "rm -rf ./dist && tsc",
     "test": "vitest",
